@@ -1,6 +1,7 @@
 
 import {useState} from "react";
 import axios from "axios"
+import img from "./clipboard.png"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import Loader from './Loader';
@@ -9,6 +10,12 @@ export default function App() {
   const [input, setInput] = useState("");
   const[error,seterror] = useState(false)
   const [loading, setLoading] = useState(false);
+
+
+
+function copyToClipboard(data){
+  navigator.clipboard.writeText(data)
+}
 
   function handleMeaning() {
        setLoading(true);
@@ -68,6 +75,9 @@ export default function App() {
             <Card key={index}>
               <Card.Body>
                 <Card.Title>{x.definition}</Card.Title>
+                <button className="btn" onClick={()=>copyToClipboard(x.definition)}>
+                <img src={img} alt="buttonpng" border="0" width="30px" /> Copy
+                </button>
               </Card.Body>
             </Card>
           ))}
